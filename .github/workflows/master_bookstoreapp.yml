@@ -58,6 +58,13 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E665BD84DEB846C495C3B722332D9FA4 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C718C757446A4CE592C89CE2F15B23E6 }}
 
+      - name: Apply EF Core Migrations
+        run: |
+          dotnet tool install --global dotnet-ef
+          dotnet ef database update --connection "$DB_CONNECTION_STRING"
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
