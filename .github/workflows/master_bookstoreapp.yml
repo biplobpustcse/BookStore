@@ -59,9 +59,10 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C718C757446A4CE592C89CE2F15B23E6 }}
 
       - name: Apply EF Core Migrations
-        run: |   
+        run: |
           dotnet tool install --global dotnet-ef --version 8.0.0
-          dotnet ef database update --project "./BookStore.Data/BookStore.Data.csproj" --connection "$DB_CONNECTION_STRING"
+          dotnet ef database update --project "./BookStore.Data/BookStore.Data.csproj" --startup-project "./BookStore.Api/BookStore.Api.csproj" --connection "$DB_CONNECTION_STRING"
+        working-directory: "${{ env.DOTNET_ROOT }}/myapp"
         env:
           DB_CONNECTION_STRING: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
 
