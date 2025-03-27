@@ -61,8 +61,7 @@ jobs:
       - name: Apply EF Core Migrations
         run: |
           dotnet tool install --global dotnet-ef --version 8.0.0
-          dotnet ef database update --project "./BookStore.Data/BookStore.Data.csproj" --startup-project "./BookStore.Api/BookStore.Api.csproj" --connection "$DB_CONNECTION_STRING"
-        working-directory: "${{ env.DOTNET_ROOT }}/myapp"
+          dotnet ef database update --project "BookStore.Data/BookStore.Data.csproj" --startup-project "BookStore.Api/BookStore.Api.csproj" --connection "$DB_CONNECTION_STRING"
         env:
           DB_CONNECTION_STRING: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
 
