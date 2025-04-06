@@ -22,8 +22,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection"),
         sqlOptions => sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 3, // Maximum retry attempts
-            maxRetryDelay: TimeSpan.FromSeconds(120), // Maximum delay between retries
+            maxRetryCount: 2, // Maximum retry attempts
+            maxRetryDelay: TimeSpan.FromSeconds(60), // Maximum delay between retries
             errorNumbersToAdd: null // Optional, specify additional error numbers to trigger retries
         )
     )
