@@ -27,7 +27,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+        run: dotnet publish -c Release -o ./myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -61,10 +61,10 @@ jobs:
       - name: Apply EF Core Migrations
         run: |
           dotnet tool install --global dotnet-ef --version 8.0.0
-          dotnet ef database update --project "BookStore.Data/BookStore.Data.csproj" --startup-project "BookStore.Api/BookStore.Api.csproj" --connection "$DB_CONNECTION_STRING"
+          dotnet ef database update --project "../BookStore.Data/BookStore.Data.csproj" --startup-project "../BookStore.Api/BookStore.Api.csproj" --connection "$DB_CONNECTION_STRING"
         env:
           DB_CONNECTION_STRING: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        working-directory: ./${{env.DOTNET_ROOT}}/myapp
+        working-directory: ./myapp
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
