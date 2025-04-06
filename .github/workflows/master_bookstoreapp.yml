@@ -64,7 +64,7 @@ jobs:
           dotnet ef database update --project "BookStore.Data/BookStore.Data.csproj" --startup-project "BookStore.Api/BookStore.Api.csproj" --connection "$DB_CONNECTION_STRING"
         env:
           DB_CONNECTION_STRING: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        working-directory: ./BookStore
+        working-directory: ./${{env.DOTNET_ROOT}}/myapp
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
