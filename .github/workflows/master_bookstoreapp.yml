@@ -55,9 +55,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_03DA2E868BBA4180AB1D8EEE5D1E5C90 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E665BD84DEB846C495C3B722332D9FA4 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C718C757446A4CE592C89CE2F15B23E6 }}
 
       - name: Install dotnet-ef
         run: dotnet tool install --global dotnet-ef --version 8.0.0
