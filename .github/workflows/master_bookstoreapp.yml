@@ -13,7 +13,8 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -46,6 +47,9 @@ jobs:
       contents: read
 
     steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
@@ -62,8 +66,11 @@ jobs:
       - name: Install dotnet-ef
         run: dotnet tool install --global dotnet-ef --version 8.0.0
 
+      - name: Add dotnet tools to PATH
+        run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -Append -Encoding ascii $env:GITHUB_PATH
+
       - name: Apply EF Core Migrations
-        run: dotnet ef database update --project "../BookStore.Data/BookStore.Data.csproj" --startup-project "../BookStore.Api/BookStore.Api.csproj" --connection "$env:DB_CONNECTION_STRING"
+        run: dotnet ef database update --project "BookStore.Data/BookStore.Data.csproj" --startup-project "BookStore.Api/BookStore.Api.csproj" --connection "$env:DB_CONNECTION_STRING"
         env:
           DB_CONNECTION_STRING: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
 
