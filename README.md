@@ -116,6 +116,9 @@ app.Run();
 add-migration init
 update-database
 ```
+Add migration Exception calling "Start" with "1" argument(s): "The specified executable is not a valid application for this OS platform."
+https://stackoverflow.com/questions/70040512/add-migration-exception-calling-start-with-1-arguments-the-specified-exe
+
 ## ID/CD with GitHub Action
 ![image](https://github.com/user-attachments/assets/03381838-f890-42f5-9ad8-16843d8434ae)
 
